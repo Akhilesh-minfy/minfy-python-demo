@@ -2,35 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage ("Install") {
+        stage ("Build") {
             steps {
-                sh 'ls'
-                sh 'python -m pip install --upgrade pip'
-                sh 'pip install -r requirements.txt'
+                sh 'docker build -t minfyakhilesh/app1 .'
 
             }
         }
-        stage ("Linting") {
+        stage ("pushing") {
             steps {
-                script {
-                    echo "This is my Linting Step"
-                }
-            }
-        }
-        stage ("Install Packages") {
-            steps {
-                script {
-                    echo "This is Install PAkcges Step"
-                }
-            }
-        }
-        stage ("Run Application") {
-            steps {
-                script {
-                    echo "This is my Run applcaition Step"
-                }
-            }
+            sh 'docker push minfyakhilesh/app1'
         }
 
     }
+}
 }
