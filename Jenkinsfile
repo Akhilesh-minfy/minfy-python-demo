@@ -10,7 +10,7 @@ pipeline {
             steps {
                // withCredentials([string(credentialsId: DOCKER_CREDENTIAL_ID, variable: 'DOCKER_TOKEN')]) {
                   //  sh 'echo $DOCKER_TOKEN | docker login --username minfyakhilesh --password-stdin'
-                docker login -u minfyakhilesh -p Akhilesh@123
+                
                 }
             }
         }
