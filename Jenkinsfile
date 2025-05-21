@@ -9,7 +9,7 @@ pipeline {
         stage ("Login to Docker") {
             steps {
                 withCredentials([string(credentialsId: DOCKER_CREDENTIAL_ID, variable: 'DOCKER_TOKEN')]) {
-                    sh 'echo $DOCKER_TOKEN | docker login --username your-username --password-stdin'
+                    sh 'echo $DOCKER_TOKEN | docker login --username minfyakhilesh --password-stdin'
                 }
             }
         }
