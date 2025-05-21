@@ -1,18 +1,28 @@
 pipeline {
     agent any
 
-    stages {
-        stage ("Build") {
-            steps {
-                sh 'docker build -t minfyakhilesh/app1 .'
+    environment {
+        DOCKER_CREDENTIAL_ID = 'e36e7080-5f61-4d38-bc9a-ff0576cacb5e'  // Replace with your actual Jenkins credential ID
+    }
 
+    stages {
+        stage ("Login to Docker") {
+            steps {
+                withCredentials([string(credentialsId: DOCKER_CREDENTIAL_ID, variable: 'DOCKER_TOKEN')]) {
+                    sh 'echo $DOCKER_TOKEN | docker login --username your-username --password-stdin'
+                }
             }
         }
-        stage ("pushing") {
+        stage ("Build Image") {
             steps {
-            sh 'docker push minfyakhilesh/app1'
+                sh 'docker build -t minfyakhilesh/app1 .'
+            }
         }
-
+        stage ("Push Image") {
+            steps {
+                sh 'docker push minfyakhilesh/app1'
+            }
+        }
     }
 }
-}
+
